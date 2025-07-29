@@ -1,0 +1,344 @@
+/* 🎯 COMPACTAÇÃO MÁXIMA DO CABEÇALHO PARA MAIS VISUALIZAÇÃO DAS TAREFAS */
+
+/* ========== HEADER SUPER COMPACTO ========== */
+.task-header {
+    margin-bottom: 8px !important; /* Reduzido drasticamente de 2rem */
+    padding: 8px 0 !important; /* Padding mínimo */
+    gap: 8px !important;
+    min-height: auto !important;
+}
+
+.page-title {
+    margin: 0 !important;
+    gap: 6px !important;
+    align-items: center !important;
+}
+
+.page-title h2 {
+    font-size: 1.2rem !important; /* Reduzido significativamente */
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    font-weight: 600 !important;
+}
+
+.page-title i {
+    font-size: 1.1rem !important; /* Ícone menor */
+}
+
+/* ========== SEARCH BAR COMPACTA ========== */
+.header-actions {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.search-bar {
+    height: 32px !important; /* Altura reduzida */
+    max-width: 250px !important;
+}
+
+.search-bar input {
+    height: 32px !important;
+    padding: 6px 12px 6px 35px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+}
+
+.search-bar i {
+    font-size: 12px !important;
+    left: 10px !important;
+}
+
+/* ========== FILTERS BAR ULTRA COMPACTA ========== */
+.filters-bar {
+    margin-bottom: 8px !important; /* Reduzido drasticamente */
+    padding: 8px 12px !important; /* Padding mínimo */
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.filters-row {
+    gap: 12px !important; /* Espaçamento reduzido */
+    margin-bottom: 6px !important;
+}
+
+.filter-group {
+    margin: 0 !important;
+    min-width: auto !important;
+}
+
+.filter-group label {
+    font-size: 11px !important; /* Fonte muito pequena */
+    margin-bottom: 2px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+.filter-group select {
+    height: 28px !important; /* Altura reduzida */
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+    border-radius: 4px !important;
+    border: 1px solid #d1d5db !important;
+    background: white !important;
+    min-width: 100px !important;
+}
+
+.filter-with-button {
+    gap: 4px !important;
+}
+
+.btn-icon {
+    width: 28px !important;
+    height: 28px !important;
+    padding: 4px !important;
+    font-size: 11px !important;
+}
+
+/* ========== BOTÕES DE FILTRO COMPACTOS ========== */
+.filter-buttons {
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.btn-sm {
+    height: 28px !important;
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+    border-radius: 4px !important;
+    min-width: auto !important;
+}
+
+.btn-sm i {
+    font-size: 10px !important;
+    margin-right: 4px !important;
+}
+
+/* ========== MAXIMIZAR ÁREA DA TABELA ========== */
+.tasks-table-container {
+    margin-top: 4px !important;
+    height: calc(100vh - 160px) !important; /* Altura máxima dinâmica */
+    min-height: 400px !important;
+    overflow-y: auto !important;
+    background: white !important;
+    border-radius: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ========== TABELA MAIS ESPAÇOSA ========== */
+.tasks-table {
+    font-size: 14px !important;
+    width: 100% !important;
+}
+
+.tasks-table thead tr {
+    background: #f8fafc !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+}
+
+.tasks-table th {
+    padding: 10px 8px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #475569 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background: #f8fafc !important;
+}
+
+.tasks-table tbody tr {
+    height: 50px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    transition: all 0.2s ease !important;
+}
+
+.tasks-table tbody tr:hover {
+    background: #fafbff !important;
+    transform: none !important; /* Remove transform para performance */
+    box-shadow: inset 0 0 0 1px #e0e7ff !important;
+}
+
+.tasks-table td {
+    padding: 10px 8px !important;
+    font-size: 13px !important;
+    vertical-align: middle !important;
+    border: none !important;
+}
+
+/* ========== SCROLL HINT COMPACTO ========== */
+.table-scroll-hint {
+    padding: 6px 12px !important;
+    margin: 4px 0 !important;
+    font-size: 11px !important;
+    background: #e0f2fe !important;
+    color: #0369a1 !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+}
+
+.table-scroll-hint i {
+    font-size: 12px !important;
+    margin-right: 4px !important;
+}
+
+/* ========== RESPONSIVIDADE MELHORADA ========== */
+@media (max-width: 768px) {
+    .task-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 6px !important;
+        padding: 6px 0 !important;
+    }
+    
+    .page-title h2 {
+        font-size: 1.1rem !important;
+    }
+    
+    .search-bar {
+        max-width: 100% !important;
+        height: 30px !important;
+    }
+    
+    .search-bar input {
+        height: 30px !important;
+        font-size: 12px !important;
+    }
+    
+    .filters-bar {
+        padding: 6px 8px !important;
+    }
+    
+    .filters-row {
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+    
+    .filter-group {
+        width: 100% !important;
+    }
+    
+    .filter-group select {
+        width: 100% !important;
+        height: 32px !important;
+    }
+    
+    .filter-buttons {
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+    
+    .btn-sm {
+        width: 100% !important;
+        height: 32px !important;
+        justify-content: center !important;
+    }
+    
+    .tasks-table-container {
+        height: calc(100vh - 180px) !important;
+        margin-top: 6px !important;
+    }
+    
+    .tasks-table th {
+        padding: 8px 6px !important;
+        font-size: 10px !important;
+    }
+    
+    .tasks-table td {
+        padding: 8px 6px !important;
+        font-size: 12px !important;
+    }
+    
+    .tasks-table tbody tr {
+        height: 45px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title h2 {
+        font-size: 1rem !important;
+    }
+    
+    .filters-bar {
+        padding: 4px 6px !important;
+    }
+    
+    .filter-group label {
+        font-size: 10px !important;
+    }
+    
+    .filter-group select {
+        font-size: 11px !important;
+        height: 30px !important;
+    }
+    
+    .btn-sm {
+        font-size: 10px !important;
+        height: 30px !important;
+    }
+    
+    .tasks-table-container {
+        height: calc(100vh - 170px) !important;
+    }
+    
+    .tasks-table tbody tr {
+        height: 42px !important;
+    }
+}
+
+/* ========== ANIMAÇÕES SUAVES ========== */
+.tasks-table tbody tr,
+.filter-group select,
+.btn-sm {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ========== OTIMIZAÇÃO DE PERFORMANCE ========== */
+.tasks-table-container {
+    transform: translateZ(0) !important; /* Force GPU acceleration */
+    -webkit-transform: translateZ(0) !important;
+}
+
+.tasks-table {
+    contain: layout style paint !important; /* CSS Containment */
+}
+
+/* ========== ESTADO VAZIO COMPACTO ========== */
+.empty-state-content {
+    padding: 30px 15px !important;
+}
+
+.empty-state-content i {
+    font-size: 36px !important;
+    margin-bottom: 8px !important;
+}
+
+.empty-state-content p {
+    font-size: 14px !important;
+    margin: 0 !important;
+}
+
+/* ========== MAIN CONTENT OTIMIZADO ========== */
+.main-content {
+    padding: 10px 16px !important; /* Padding reduzido */
+    overflow: hidden !important; /* Evita scrolls desnecessários */
+}
+
+/* ========== MAXIMIZAR USO DO VIEWPORT ========== */
+@media (min-height: 600px) {
+    .tasks-table-container {
+        height: calc(100vh - 140px) !important;
+    }
+}
+
+@media (min-height: 800px) {
+    .tasks-table-container {
+        height: calc(100vh - 130px) !important;
+    }
+} 
