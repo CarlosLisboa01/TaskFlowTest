@@ -1,0 +1,292 @@
+/* 👤 CORREÇÃO DAS INFORMAÇÕES DO USUÁRIO NO MOBILE */
+
+/* ========== USER INFO VISÍVEL EM TODAS AS TELAS ========== */
+.user-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 16px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px !important;
+    margin: 16px 0 0 0 !important;
+    border: 1px solid rgba(123, 104, 238, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    min-height: 60px !important;
+}
+
+.user-avatar {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: linear-gradient(135deg, #7B68EE, #9575cd) !important;
+    border-radius: 50% !important;
+    color: white !important;
+}
+
+.user-avatar i {
+    font-size: 20px !important;
+    color: white !important;
+}
+
+.user-details {
+    flex: 1 !important;
+    min-width: 0 !important; /* Permite truncamento */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+}
+
+.user-name {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #2d3748 !important;
+    line-height: 1.2 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    display: block !important;
+}
+
+.user-email {
+    font-size: 12px !important;
+    color: #64748b !important;
+    line-height: 1.2 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    display: block !important;
+}
+
+.logout-btn {
+    flex-shrink: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+    border: 1px solid #fca5a5 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.logout-btn:hover {
+    background: #fecaca !important;
+    transform: scale(1.05) !important;
+}
+
+.logout-btn i {
+    font-size: 14px !important;
+}
+
+/* ========== SIDEBAR AJUSTES PARA MOBILE ========== */
+.sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+.nav-menu {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 16px 0 !important;
+}
+
+/* ========== RESPONSIVIDADE ESPECÍFICA ========== */
+@media (max-width: 768px) {
+    /* Sidebar mobile específica */
+    .sidebar {
+        width: 280px !important;
+        min-height: 100vh !important;
+        padding: 20px 16px 16px 16px !important;
+    }
+    
+    .user-info {
+        margin: 12px 0 0 0 !important;
+        padding: 10px 12px !important;
+        min-height: 55px !important;
+        gap: 10px !important;
+    }
+    
+    .user-avatar {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    .user-avatar i {
+        font-size: 18px !important;
+    }
+    
+    .user-name {
+        font-size: 13px !important;
+        max-width: 160px !important;
+    }
+    
+    .user-email {
+        font-size: 11px !important;
+        max-width: 160px !important;
+    }
+    
+    .logout-btn {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    .logout-btn i {
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 260px !important;
+        padding: 16px 12px 12px 12px !important;
+    }
+    
+    .user-info {
+        padding: 8px 10px !important;
+        min-height: 50px !important;
+        gap: 8px !important;
+    }
+    
+    .user-avatar {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .user-avatar i {
+        font-size: 16px !important;
+    }
+    
+    .user-name {
+        font-size: 12px !important;
+        max-width: 140px !important;
+    }
+    
+    .user-email {
+        font-size: 10px !important;
+        max-width: 140px !important;
+    }
+    
+    .logout-btn {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    
+    .logout-btn i {
+        font-size: 12px !important;
+    }
+}
+
+/* ========== GARANTIR VISIBILIDADE ========== */
+.sidebar .user-info,
+.sidebar .user-info * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+}
+
+.sidebar .user-details {
+    display: flex !important;
+}
+
+.sidebar .user-name,
+.sidebar .user-email {
+    display: block !important;
+}
+
+/* ========== LOADING STATE ========== */
+.user-name:empty::after {
+    content: "Carregando..." !important;
+    color: #94a3b8 !important;
+    font-style: italic !important;
+}
+
+.user-email:empty::after {
+    content: "..." !important;
+    color: #94a3b8 !important;
+}
+
+/* ========== ANIMAÇÃO DE ENTRADA ========== */
+@keyframes slideInUser {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-info {
+    animation: slideInUser 0.3s ease-out !important;
+}
+
+/* ========== FORÇA EXIBIÇÃO EM MOBILE ========== */
+@media (max-width: 768px) {
+    .sidebar.active .user-info {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    .sidebar.active .user-details {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .sidebar.active .user-name,
+    .sidebar.active .user-email {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
+/* ========== FALLBACK PARA PROBLEMAS DE CSS ========== */
+.user-info[style*="display: none"] {
+    display: flex !important;
+}
+
+.user-details[style*="display: none"] {
+    display: flex !important;
+}
+
+/* ========== DESTAQUE NO HOVER ========== */
+.user-info:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ========== SCROLL INTERNO DA SIDEBAR ========== */
+.sidebar {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* ========== GARANTIR QUE NÃO SEJA CORTADO ========== */
+.sidebar {
+    padding-bottom: 80px !important; /* Espaço extra para user-info */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        padding-bottom: 70px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        padding-bottom: 60px !important;
+    }
+} 
