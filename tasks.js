@@ -113,24 +113,32 @@ document.head.appendChild(priorityStyles);
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', async () => {
-    // Verificar se estamos na página dashboard
-    if (!window.location.pathname.includes('dashboard.html')) return;
+    // Verificar se estamos na página dashboard ou calendário
+    const isDashboard = window.location.pathname.includes('dashboard.html');
+    const isCalendar = window.location.pathname.includes('calendario.html');
     
-    // Inicializar elementos do DOM
-    tasksTbody = document.getElementById('tasks-tbody');
-    addTaskBtn = document.getElementById('add-task-btn');
+    if (!isDashboard && !isCalendar) return;
+    
+    // Inicializar elementos do DOM baseado na página
+    if (isDashboard) {
+        // Elementos específicos do dashboard
+        tasksTbody = document.getElementById('tasks-tbody');
+        addTaskBtn = document.getElementById('add-task-btn');
+        statusFilter = document.getElementById('status-filter');
+        priorityFilter = document.getElementById('priority-filter');
+        typeFilter = document.getElementById('type-filter');
+        searchInput = document.getElementById('search-input');
+        clearFiltersBtn = document.getElementById('clear-filters-btn');
+        addTaskTypeBtn = document.getElementById('add-task-type-btn');
+        modalAddTaskTypeBtn = document.getElementById('modal-add-task-type-btn');
+    }
+    
+    // Elementos comuns ao dashboard e calendário
     taskModal = document.getElementById('task-modal');
     closeModalBtn = document.getElementById('close-modal');
     taskForm = document.getElementById('task-form');
     deleteTaskBtn = document.getElementById('delete-task-btn');
     modalTitle = document.getElementById('modal-title');
-    statusFilter = document.getElementById('status-filter');
-    priorityFilter = document.getElementById('priority-filter');
-    typeFilter = document.getElementById('type-filter');
-    searchInput = document.getElementById('search-input');
-    clearFiltersBtn = document.getElementById('clear-filters-btn');
-    addTaskTypeBtn = document.getElementById('add-task-type-btn');
-    modalAddTaskTypeBtn = document.getElementById('modal-add-task-type-btn');
     taskTypeModal = document.getElementById('task-type-modal');
     closeTypeModalBtn = document.getElementById('close-type-modal');
     taskTypeForm = document.getElementById('task-type-form');
@@ -141,8 +149,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Inicializar os tipos de tarefas padrão
     taskTypes = ['Aperfeiçoar', 'Solicitação de recurso', 'Correção de bugs'];
     
-    // Carregar tarefas
-    await fetchTasks();
+    // Carregar tarefas apenas no dashboard
+    if (isDashboard) {
+        await fetchTasks();
+    }
     
     // Configurar listeners de eventos
     setupEventListeners();
@@ -610,6 +620,23 @@ function getPriorityClass(priority) {
 // Abrir modal de tarefa (nova ou edição)
 function openTaskModal(task = null) {
     console.log('Função openTaskModal chamada', task);
+    console.log('Página atual:', window.location.pathname);
+    
+    // Tentar encontrar elementos se eles ainda não foram inicializados
+    if (!taskModal) {
+        taskModal = document.getElementById('task-modal');
+        console.log('Tentando reobter taskModal:', taskModal ? 'encontrado' : 'não encontrado');
+    }
+    
+    if (!taskForm) {
+        taskForm = document.getElementById('task-form');
+        console.log('Tentando reobter taskForm:', taskForm ? 'encontrado' : 'não encontrado');
+    }
+    
+    if (!modalTitle) {
+        modalTitle = document.getElementById('modal-title');
+        console.log('Tentando reobter modalTitle:', modalTitle ? 'encontrado' : 'não encontrado');
+    }
     
     // Resetar formulário
     if (taskForm) {
@@ -621,6 +648,8 @@ function openTaskModal(task = null) {
     const taskIdInput = document.getElementById('task-id');
     if (taskIdInput) {
         taskIdInput.value = '';
+    } else {
+        console.log('taskIdInput não encontrado');
     }
     
     // Certifique-se de que o modal esteja visível
@@ -633,45 +662,81 @@ function openTaskModal(task = null) {
             console.log('Modal classes:', taskModal.className);
         }, 100);
     } else {
-        console.log('taskModal não encontrado');
+        console.log('taskModal não encontrado - verificando se existe no DOM');
+        const modalCheck = document.getElementById('task-modal');
+        console.log('Verificação manual do modal:', modalCheck ? 'existe' : 'não existe');
     }
     
     if (task) {
         // Modo de edição
-        modalTitle.textContent = 'Editar Tarefa';
-        document.getElementById('task-id').value = task.id;
-        document.getElementById('task-name').value = task.nome_da_tarefa;
-        document.getElementById('task-status').value = task.status;
-        document.getElementById('task-priority').value = task.prioridade;
-        document.getElementById('task-due-date').value = task.data_limite;
-        document.getElementById('task-type').value = task.tipo_de_tarefa;
-        document.getElementById('task-description').value = task.descricao || '';
-        document.getElementById('task-effort').value = task.nivel_de_esforco;
+        if (modalTitle) {
+            modalTitle.textContent = 'Editar Tarefa';
+        }
+        
+        // Preencher campos do formulário com verificação
+        const taskIdInput = document.getElementById('task-id');
+        const taskNameInput = document.getElementById('task-name');
+        const taskStatusInput = document.getElementById('task-status');
+        const taskPriorityInput = document.getElementById('task-priority');
+        const taskDueDateInput = document.getElementById('task-due-date');
+        const taskTypeInput = document.getElementById('task-type');
+        const taskDescriptionInput = document.getElementById('task-description');
+        const taskEffortInput = document.getElementById('task-effort');
+        
+        if (taskIdInput) taskIdInput.value = task.id;
+        if (taskNameInput) taskNameInput.value = task.nome_da_tarefa;
+        if (taskStatusInput) taskStatusInput.value = task.status;
+        if (taskPriorityInput) taskPriorityInput.value = task.prioridade;
+        if (taskDueDateInput) taskDueDateInput.value = task.data_limite;
+        if (taskTypeInput) taskTypeInput.value = task.tipo_de_tarefa;
+        if (taskDescriptionInput) taskDescriptionInput.value = task.descricao || '';
+        if (taskEffortInput) taskEffortInput.value = task.nivel_de_esforco;
+        
+        console.log('Campos preenchidos para edição:', {
+            id: task.id,
+            nome: task.nome_da_tarefa,
+            status: task.status
+        });
         
         // Mostrar botão de excluir
-        deleteTaskBtn.classList.remove('hidden');
+        if (deleteTaskBtn) {
+            deleteTaskBtn.classList.remove('hidden');
+        }
     } else {
         // Modo de criação
-        modalTitle.textContent = 'Nova Tarefa';
+        if (modalTitle) {
+            modalTitle.textContent = 'Nova Tarefa';
+        }
         
         // Definir data padrão (hoje)
         const today = new Date();
         const formattedDate = today.toISOString().slice(0, 10);
-        document.getElementById('task-due-date').value = formattedDate;
+        const dueDateInput = document.getElementById('task-due-date');
+        if (dueDateInput) dueDateInput.value = formattedDate;
         
         // Valores padrão para os outros campos
-        document.getElementById('task-status').value = 'Não iniciado';
-        document.getElementById('task-priority').value = 'Média';
-        document.getElementById('task-type').value = 'Aperfeiçoar';
-        document.getElementById('task-effort').value = 'Médio';
+        const statusInput = document.getElementById('task-status');
+        const priorityInput = document.getElementById('task-priority');
+        const typeInput = document.getElementById('task-type');
+        const effortInput = document.getElementById('task-effort');
+        
+        if (statusInput) statusInput.value = 'Não iniciado';
+        if (priorityInput) priorityInput.value = 'Média';
+        if (typeInput) typeInput.value = 'Aperfeiçoar';
+        if (effortInput) effortInput.value = 'Médio';
         
         // Esconder botão de excluir
-        deleteTaskBtn.classList.add('hidden');
+        if (deleteTaskBtn) {
+            deleteTaskBtn.classList.add('hidden');
+        }
     }
     
     // Focar no campo de nome para facilitar a digitação
     setTimeout(() => {
-        document.getElementById('task-name').focus();
+        const taskNameInput = document.getElementById('task-name');
+        if (taskNameInput) {
+            taskNameInput.focus();
+        }
     }, 100);
 }
 
